@@ -465,21 +465,6 @@ var parts=["source","protocol","authority","userInfo","user","password","host","
           return;
         }
 
-        // If there's no `window` object, we must be running in Node.js
-        // so just require the request module and send the HTTP request that
-        // way.
-        var mikealsReq = require('request');
-        mikealsReq.get(xOriginCookieURL, function(err, httpResponse, body) {
-          if (err) {
-            consolog(
-              'Failed to connect socket (failed to get cookie)',
-              'Error:', err
-            );
-            return;
-          }
-          cb();
-        });
-
       })(function goAheadAndActuallyConnect() {
 
         // Now that we're ready to connect, create a raw underlying Socket
