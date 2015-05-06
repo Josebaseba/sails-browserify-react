@@ -1,3 +1,67 @@
+sails-browserify
+================
+
+Task folder configuration to work with Browserify and React (this is optional)
+
+### [Full Example](https://github.com/Josebaseba/sails-browserify-example)
+
+# Usage
+
+Create a Sails project and in the terminal exec this commands:
+
+```
+
+  npm install --save grunt-browserify
+
+  npm install --save grunt-react
+
+
+```
+
+Then replace all the content of tasks/ folder for the content of this repository.
+
+In the tasks/pipeline.js file (line 15) you can modify the route of the main file that Browserify is going to compile:
+
+```
+  var browserifyMainFile = '.tmp/public/js/app.js';
+
+```
+
+And you are ready to work with Browserify.
+
+You can check a full example here [Example](https://github.com/Josebaseba/sails-browserify-example)
+
+## Extra
+
+This grunt compilation works with versions, it takes the version of the package.json file and it creates the minified .js file with this sintaxis:
+
+```
+  // in development - not minified but in a single file
+  <script src="/browserify/debug.0.0.0.js"></script>
+
+  // in production - minified in a single file
+  <script src="/min/production.0.0.0.min.js"></script>
+
+```
+
+The same happens with the CSS files but in this case only in production
+
+```
+  // in production
+  <link rel="stylesheet" href="/min/production.0.0.0.min.css">
+
+```
+
+
+Why? Because if you update the JS/CSS code and you upload it to the server maybe the user still has the old versión in the cache, so changing the version, the users browser is going to download de new JS/CSS.
+
+### IMPORTANT - SAILS.IO.JS
+
+The sails.io.js file has a small modification, just commenting a few lines of code that uses require('request'). Because Browserify understands that it has to require that package, but we don't need that in the browser.
+
+You can see that change in the line 673 (until the 692 line).
+
+
 # About the `tasks` folder
 
 The `tasks` directory is a suite of Grunt tasks and their configurations, bundled for your convenience.  The Grunt integration is mainly useful for bundling front-end assets, (like stylesheets, scripts, & markup templates) but it can also be used to run all kinds of development tasks, from browserify compilation to database migrations.
@@ -52,3 +116,4 @@ You can completely disable Grunt by following the instructions above.
 
 If you still want to use Grunt for other purposes, but don't want any of the default web front-end stuff, just delete your project's `assets` folder and remove the front-end oriented tasks from the `grunt/register` and `grunt/config` folders.  You can also run `sails new myCoolApi --no-frontend` to omit the `assets` folder and front-end-oriented Grunt tasks for future projects.  You can also replace your `sails-generate-frontend` module with alternative community generators, or create your own.  This allows `sails new` to create the boilerplate for native iOS apps, Android apps, Cordova apps, SteroidsJS apps, etc.
 
+=======

@@ -6,16 +6,18 @@
  * Minifies css files and places them into .tmp/public/min directory.
  *
  * For usage docs see:
- * 		https://github.com/gruntjs/grunt-contrib-cssmin
+ *    https://github.com/gruntjs/grunt-contrib-cssmin
  */
 module.exports = function(grunt) {
 
-	grunt.config.set('cssmin', {
-		dist: {
-			src: ['.tmp/public/concat/production.css'],
-			dest: '.tmp/public/min/production.min.css'
-		}
-	});
+  var version = grunt.file.readJSON('package.json').version;
 
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.config.set('cssmin', {
+    dist: {
+      src: ['.tmp/public/concat/production.css'],
+      dest: '.tmp/public/min/production.' + version + '.min.css'
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 };

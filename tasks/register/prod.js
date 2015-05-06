@@ -2,6 +2,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('prod', [
 		'compileAssets',
 		'concat',
+		'browserify',
 		'uglify',
 		'cssmin',
 		'sails-linker:prodJs',
